@@ -3,7 +3,12 @@ public with sharing class OpportunityDiscountTriggerTest {
     @isTest
     static void testDiscountApplication() {
         // Create an opportunity with a high amount
-        Opportunity opp = new Opportunity(Name = 'Test Deal', Amount = 100000, StageName = 'Prospecting', CloseDate = Date.today().addDays(15));
+        Opportunity opp = new Opportunity(
+            Name = 'Test Deal', 
+            Amount = 100000, 
+            StageName = 'Prospecting', 
+            CloseDate = Date.today().addDays(15)
+            );
         insert opp;
         
         // Retrieve the inserted record
