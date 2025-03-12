@@ -24,4 +24,28 @@ public with sharing class GitHubCallout {
             System.debug('Callout Error: ' + e.getMessage());
         }
     }
+
+    public static Map<String, Object> getRepositoryDetails(String owner, String repoName) {
+        try {
+            String endpoint = 'callout:GitHubAPI/repos/' + owner + '/' + repoName;
+
+            HttpRequest req = new HttpRequest();
+            req.setEndpoint(endpoint);
+            req.setMethod('GET');
+            req.setHeader('Accept', 'application/json');
+
+            Http http = new Http();
+            HttpResponse res = http.send(req);
+
+            if (res.getStatusCode() == 200) {
+                return (Map<String, Object>) JSON.deserializeUntyped(res.getBody());
+            } else {
+                System.debug('Error: ' + res.getStatusCode() + ' ' + res.getBody());
+                return null;
+            }
+        } catch (Exception e) {
+            System.debug('Exception: ' + e.getMessage());
+            return null;
+        }
+    }
 }
