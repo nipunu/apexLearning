@@ -1,7 +1,7 @@
 global class CaseWebService {
     
     // Expose the method as a SOAP Web Service
-    webservice static Id createCase(String subject, String status, String priority) {
+    webservice static Id createCase(String subject, String status, String priority,String origin) {
         // Validate input
         if (String.isEmpty(subject) || String.isEmpty(status)) {
             throw new CalloutException('Subject and Status are required fields.');
@@ -11,7 +11,8 @@ global class CaseWebService {
         Case newCase = new Case(
             Subject = subject,
             Status = status,
-            Priority = priority
+            Priority = priority,
+            Origin = origin
         );
         insert newCase;
         
