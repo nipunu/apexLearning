@@ -27,7 +27,7 @@ public with sharing class GitHubCallout {
 
     public static Map<String, Object> getRepositoryDetails(String owner, String repoName) {
         try {
-            String endpoint = 'callout:GitHubAPI/repos/' + owner + '/' + repoName;
+            String endpoint = GITHUB_API_ENDPOINT + '/repos/' + owner + '/' + repoName;
 
             HttpRequest req = new HttpRequest();
             req.setEndpoint(endpoint);
